@@ -19,7 +19,7 @@ const config = {
 initializeApp(config);
 
 export const auth = getAuth();
-connectAuthEmulator(auth, 'http://192.168.100.96:9099');
+connectAuthEmulator(auth, 'http://192.168.100.187:9099');
 
 const db = getFirestore();
 connectFirestoreEmulator(db, 'localhost', 8080);

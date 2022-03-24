@@ -1,35 +1,30 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
-import { signInWithEmailAndPassword } from 'firebase/auth';
+import { StyleSheet, Text, View, TouchableOpacity, TextInput } from 'react-native';
 import React, { useEffect, useState } from 'react';
-import { auth } from './database/firebase';
-import { useNavigation } from '@react-navigation/native';
+import { NavigationContainer, useNavigation } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import Login from './views/Login';
+// import AppLoading from 'expo-app-loading';
+// import { useFonts, Urbanist_400Regular } from '@expo-google-fonts/urbanist';
+// import { useFonts as Fuentes } from 'expo-font';
+// import { createIconSetFromIcoMoon } from '@expo/vector-icons';
 
 
-export default function App() {
+// import { createIconSetFromIcoMoon } from '@expo/vector-icons';
 
-  const iniciarSesion = () => {
-    signInWithEmailAndPassword(auth, 'test@test.com', '123456')
-      .then((userCredentials) => {
-        console.log("login");
-      })
-      .catch((err) => {
-        console.log(err);
-      })
-  }
-  
+const Stack = createNativeStackNavigator();
+
+export default function App() {  
+
   return (
-    <View style={styles.container}>
-      <TouchableOpacity
-        style={styles.button}
-        onPress={() => iniciarSesion()}
-      >
-        <Text>Inicia Sesion</Text>
-      </TouchableOpacity>
-
-      {/* <Text>Email: {auth.currentUser?.email}</Text> */}
-      <StatusBar style="auto" />
-    </View>
+    <NavigationContainer>
+      <Stack.Navigator>
+        <Stack.Screen options={{ headerShown: false }} name="Login" component={Login} />
+      {/* <Stack.Screen name="Notifications" component={Notifications} /> */}
+      {/* <Stack.Screen name="Profile" component={Profile} /> */}
+      {/* <Stack.Screen name="Settings" component={Settings} /> */}
+    </Stack.Navigator>
+    </NavigationContainer>
   );
 }
 
@@ -39,5 +34,6 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
+    alignSelf: 'center',
   },
 });
